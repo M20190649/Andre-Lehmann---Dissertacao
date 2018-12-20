@@ -1,0 +1,34 @@
+\swapcontents
+{
+    % Changing babel package inside a single chapter
+    % https://tex.stackexchange.com/questions/20987/changing-babel-package-inside-a-single-chapter
+    %
+    % Multiple-language document - babel - selectlanguage vs begin/end{otherlanguage}
+    % https://tex.stackexchange.com/questions/36526/multiple-language-document-babel-selectlanguage-vs-begin-endotherlanguage
+    \addtotextpreliminarycontent{English's Abstract}
+    \begin{otherlanguage*}{english}
+    \begin{resumo}[Abstract]
+
+        For many years trajectory similarity research has focused on raw trajectories, considering only space and time information. With the trajectory semantic enrichment emerged the need for similarity measures that support space, time, and semantics. Although some trajectory similarity measures deal with all these dimensions, they consider only the stops, ignoring the moves. We claim that, for some applications, the movement between stops is as important as the stops, and it must be considered in the similarity analysis.
+        In this thesis we propose SMSM, a novel similarity measure for semantic trajectories that considers both stops and moves.
+        We evaluate SMSM with three trajectory datasets: (i) a synthetic trajectory dataset generated with the Hermoupolis semantic trajectory generator, (ii) a real trajectory dataset from the CRAWDAD project, and (iii) the Geolife dataset. The results show that SMSM overcomes state-of-the-art measures developed for both raw and semantic trajectories.
+
+        \imprimirpalavraschave{Keywords}{\begin{inparaitem}[]\palavraschaveingles\end{inparaitem}}
+
+    \end{resumo}
+    \end{otherlanguage*}
+}
+{
+    \addtotextpreliminarycontent{Resumo em Português}
+    \begin{otherlanguage*}{brazil}
+    \begin{resumo}[Resumo]
+
+        Por muitos anos a pesquisa em similaridade de trajetórias focou nas trajetórias brutas, considerando somente a informação de espaço e tempo. Com o enriquecimento semãntico das trajetórias emergiu a necessidade por medidas de similaridade que suportem o espaço, tempo e semântica. Apesar de algumas medidades de similaridade para trajetórias lidarem com todas estas dimensões, elas consideram somente os stops, ignorando os moves. Acredita-se que, para algumas aplicações, o movimento entre os stops é tão importante quanto o stop em si, e ele deve ser levado em consideração na análise da similaridade.
+        Nesta dissertação é proposta a medida SMSM, um nova medidade de similaridade para trajetórias semânticas que considera tanto os stops quanto os moves.
+        O SMSM é avaliado em três conjuntos de dados: (i) um conjunto de dados de trajetórias sintéticas criadas com o gerador de trajetórias semânticas Hermoupolis, (ii) um conjunto de trajetórias reais do projeto CRAWDAD, e (iii) o conjunto de dados Geolife. Os resultados mostram que o SMSM supera o as medidas de similaridade estado-da-arte desenvolvidas tanto para trajetórias brutas quanto semãnticas.
+        
+        \imprimirpalavraschave{Palavras-chaves}{\begin{inparaitem}[]\palavraschaveportugues\end{inparaitem}}
+
+    \end{resumo}
+    \end{otherlanguage*}
+}
