@@ -1,5 +1,5 @@
 % The \phantomsection command is needed to create a link to a place in the document that is not a
-% figure, equation, table, section, subsection, chapter, etc.
+% figure, equation, table, section, section, chapter, etc.
 %
 % When do I need to invoke \phantomsection?
 % https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection
@@ -9,22 +9,16 @@
 % Multiple-language document - babel - selectlanguage vs begin/end{otherlanguage}
 % https://tex.stackexchange.com/questions/36526/multiple-language-document-babel-selectlanguage-vs-begin-endotherlanguage
 
-\chapter{SMSM}\label{sec:proposed_measure}
+\chapter[\lang{Basic concepts and the Proposed measure}{Conceitos básicos e a Medida proposta}]
+{
+    \lang
+    {Basic concepts and the Proposed measure}
+    {Conceitos básicos e a Medida proposta}
+}\label{sec:proposed_measure}
 
     \begin{flushright}
          
     \end{flushright}
-In this section we present a novel similarity measure to consider both stops and moves of semantic trajectories, called SMSM (\textit{Stops and Moves Similarity Measure}). The idea behind SMSM is a measure that overcomes the strictness of LCSS and EDR by allowing partial order and dimension matching, and the limitations of MSM by considering both stops and moves. Before we introduce the concepts related to the new measure, we formally define semantic trajectory, considering its sequence of stops and moves, which is an enriched extension of the definition presented in \cite{Spaccapietra:2008:CVT:1347466.1347785}:
-
-
-\begin{definition}
-\label{def:semantic_trajectory}
-A semantic trajectory  $ST=\langle s_1, m_1, s_2, m_2, s_3,m_3, ...., s_n, m_n, s_{n+1} \rangle$ is a time ordered sequence of stops and moves, where each stop $s_i$ has a set of attributes $\{d_{s1}, d_{s2}, ...d_{sq}\}$ characterizing it according to q-dimensions, and each move $m_j$  has a set of attributes $\{d_{m1}, d_{m2}, ...d_{mr}\}$  characterizing it according to r-dimensions. 
-\end{definition}
-
-In this work we assume that a semantic trajectory starts and ends with a stop, otherwise we transform the first and/or the last point of the trajectory in a stop {as we assume that every trajectory starts and ends at a place}. In the following section we present the new concepts and the definition of the proposed similarity measure SMSM.
-
-\subsection{Basic Concepts and the Proposed Measure}
 
 Stops and moves by definition are different and heterogeneous trajectory elements. A stop may have a spatial position, a start and end time, a category, or a set of attributes related to the category (e.g. Category hotel, stars, rate, price), etc. A move always starts and ends in a stop and may be characterized by different attributes as average speed, traveled distance, sequence of streets, duration, the sequence of raw points, etc. These attributes are defined according to the needs of the application. 
 
@@ -37,7 +31,7 @@ A movement element  $e=(stopS, move, stopE)$ is a tuple formed by a start stop $
 
 
 Hereafter we will consider a semantic trajectory as a sequence of \textit{movement elements}, as follows: 
-$ST=\langle e_1=(s_1,m_1,s_2), e_2=(s_2,m_2,s_3), ..., e_n=(s_n,m_n,s_{n+1}) \rangle$.
+$ST=\langle e_1 = (s_1,m_1,s_2), e_2$\newline $= (s_2,m_2,s_3), ..., e_n = (s_n,m_n,s_{n+1}) \rangle$.
 
 Notice that we define a movement element as a trajectory part, and this structure will be used for the proposed similarity measure, where one trajectory will be compared with another one based on their movement elements.
 
@@ -71,9 +65,10 @@ In our measure we consider a score for the stops (scoreStop) and a score for the
 \begin{equation}
 %\scriptsize
 \label{func:scoreStop1}
-%\begin{split}
-  scoreStop(a, b) = \sum\limits_{i=1}^r (match_i(a_{stopS}, b_{stopS}) + match_i(a_{stopE}, b_{stopE}))\div 2* w_{i}
-%\end{split}
+\begin{split}
+  scoreStop(a, b) = \sum\limits_{i=1}^r & (match_i(a_{stopS}, b_{stopS}) + \\
+  &  match_i(a_{stopE}, b_{stopE}))\div 2* w_{i}
+\end{split}
 \end{equation}
 
 
@@ -90,14 +85,22 @@ scoreMove(a, b)  & =
 \end{equation}
 
 
+%The sum of the weights in Equations \ref{func:scoreStop1} and \ref{func:scoreMove2} should be one.
 Note in Equation \ref{func:scoreMove2} that the \emph{scoreMove} depends on the function \textit{matchStops(a, b)}. {The intuition is that two moves should be evaluated only if their starting positions (starting stops) are spatially close and the ending positions (ending stops) are close as well.}
 The function \emph{matchStops(a,b)} is true when the {spatial distance} between $a_{stopS}$ and $b_{stopS}$  as well as between $a_{stopE}$ and $b_{stopE}$ is less than or equal to $maxDist$.
+    
+    %\textcolor{red}{In real scenarios, this means that if we want to analyze movement elements, for instance, from France to Italy, we do not need to compare these trajectories with others moving from France to Spain, since the ending stop is different}.
 
 {Figure {\ref{fig:move}} shows an example of four movement elements representing part of four trajectories. The movement elements are $e_1=<A, P_1, B>$, $e_2=<A, P_2, B>$, $e_3=<A, P_3, B>$ and $e_4=<A, P_4, C>$, where $A$, $B$, and $C$ are the stops, and $P_i$ are the moves. Considering $e_1$ and $e_4$, the function $match(P_1,P_4)$ will be executed only if the function $matchStops(B,C)$ is true, i.e., $dist(B,C) \leq  maxDist$. If $dist(B,C) > maxDist$, the value of $scoreMove(e_1,e_4)$ is zero.
+%So the \emph{moves} of the movement elements $<A, P_1, B>$, $<A, P_2, B>$, $<A, P_3, B>$ will be analyzed because they have the same start and end stop.}
 }
 
-{The function \emph{scoreMove()} guarantees a partial order in the similarity analysis.
-Suppose the example in  Figure {\ref{fig:move}} is a real scenario, where $A$, $B$, and $C$ represent  places as France, Italy, and Spain, respectively. We believe that the three trajectories going from France ($A$) to Italy ($B$) must have their move analyzed because they visit the same sequence of places, while the trajectory that goes from France ($A$) to Spain ($C$) does not share the same destination, so the move of this trajectory is not compared with the others, and the function $scoreMove()$ has value zero.}
+ %and three trajectories move to $B$ following three different paths.  In the example in Figure \ref{fig:move}, if we are interested in trajectories moving from A to B, our measure will only analyze the moves $P1$, $P2$, and $P3$ of trajectories going from A to B, and these three moves will not be compared with $P4$. 
+
+%{Differences among the three movement elements rely exclusively on the differences of the move. On the other hand, the difference of these movement elements to movement element $<A, P_4, C>$ is more evident, since if it end stop is distinct, the move is distinct too. Based on this, SMSM do not compare the move of $<A, P_4, C>$ with the others movement element.}
+
+{The function \emph{scoreMove()} guarantees a partial order in the similarity analysis. %, what has not been considered by MSM, which is the closest measure to our approach, but that considers only stops and without any order. Considering that the four movement elements in Figure {\ref{fig:move}} belong to four different trajectories, MSM would give the same similarity for the parts of the trajectories going from $A$ to $B$, because it does not look the moves, and 50\% similarity with the trajectory going from $A$ to $C$ because they share 50\% of the stops.
+Suppose the example in  Figure {\ref{fig:move}} is a real scenario, where $A$, $B$, and $C$ represent  places as France, Italy, and Spain, respectively. We believe that the three trajectories going from France ($A$) to Italy ($B$) must have their move analyzed because they visit the same sequence of places, while the trajectory that goes from France ($A$) to Spain ($C$) does not share the same destination, so the move of this trajectory is not compared with the others, and the function $scoreMove()$ has values zero.}
 
 
 
@@ -129,7 +132,7 @@ Finally, we can define the global similarity of two trajectories $A$ and $B$ wit
 
 
 
-\subsection{Evaluation over a running example}
+\section{Evaluation over a running example}
 
 In this section we present a running example, comparing SMSM and MSM, since MSM is the closest approach.
 Let us consider the two trajectories shown in Figure \ref{fig:bus}. Trajectory $Q$ represents the daily routine of a professor, that starts his day at the gym in the morning, while trajectory $P$ is the daily routine of a student, that starts his day at a coffee shop. Both trajectories visit the same places, sharing some streets, but in totally different order. The trajectories are annotated with the stop category, start and end time of the stop, an hypothetical geographic position ($x, y$) of the stop and the main street followed during the moves. So considering the {notation \textit{stop name ((x, y), [start timestamp - end timestamp])}}, the student has the following movement behavior: stays at \textit{Home} (\textit{(96,215)}, [\textit{8pm-8am}]), {then} he goes via Edu Vieira street to have breakfast at the \textit{Coffee shop} (\textit{(182,201)}, [\textit{8:50am-10am}]), and from there goes via Delfino Conti street to the \textit{University} (\textit{(59,127)}, [\textit{10:25am-6:10pm}]), finishing the day moving via Henrique Fontes street to the \textit{Gym} (\textit{(268,63)}, [\textit{7:30pm-9pm}]). The professor (trajectory $Q$) goes from \textit{Home} (\textit{(13,81)}, [\textit{7pm-7am}]) via Beira-mar avenue for jogging at the \textit{Gym} (\textit{(268,63)}, [\textit{7:30am-8:30am}]). After he goes to the \textit{Coffee shop} (\textit{(182,201)}, [\textit{8:45am-9:55am}]) via Edu Vieira street, and via Delfino Conti reaches the \textit{University} (\textit{(59,127)}, [\textit{10:15am-7:45pm}]) to teach his classes until the end of the day. We have two trajectories $P$ and $Q$ with their stops and moves annotated with the category of the place, the spatial position of the visited place, the time of the visit, and the name of the street to represent the move.
@@ -141,11 +144,11 @@ Let us consider the two trajectories shown in Figure \ref{fig:bus}. Trajectory $
 
 
 In order to calculate the SMSM similarity value, we first need to construct all movement elements for each trajectory. Table \ref{tab:SMSM_tuples} lists these elements, where each element contains the start stop, the name of the street followed during the move, and the next stop. 
-%Notice in this table that the only movement element where the moves will be analyzed is $<Coffee$ $shop, Delfino$ $Conti, University>$ from trajectory $P$ and $<Coffee$ $shop, Delfino$ $Conti, University>$ from trajectory $Q$, because both start and end stops match.
 
 \begin{table}[h!]
 \scriptsize
   \centering
+ \resizebox{\linewidth}{!}{%
   \begin{tabular}{|c|c|}
   	\hline
 		\textcolor{Red}{\textbf{Student (P)}} & \textcolor{Blue}{\textbf{Professor (Q)}}\\
@@ -155,7 +158,7 @@ In order to calculate the SMSM similarity value, we first need to construct all 
       $<$University, Henrique Fontes, Gym$>$&$<$Coffee shop, Delfino Conti, University$>$\\
   	\hline
   \end{tabular}
-  \label{tab:wrong}
+  }
   \caption{Movement elements}
   \label{tab:SMSM_tuples}
 \end{table}
@@ -180,14 +183,14 @@ With distance functions and threshold values defined and elements constructed, w
 To better understand how to measure the movement element similarity let us consider  the following two movement elements: 
 \begin{itemize}
 
-\item $element_{P}=\ <Home_{[8pm-8am]}, Edu Vieira,$ $Coffee\ shop_{[8:50am-10am]}>$ ;
-\item $element_{Q}=\ <Home_{[7pm-7am]}, Beira-mar, Gym_{[7:30am-8:30am]}>$. 
+\item $element_{P}= \\ \ <Home_{[8pm-8am]}, Edu Vieira,$ $Coffee\ shop_{[8:50am-10am]}>$
+\item $element_{Q}= \\ \ <Home_{[7pm-7am]}, Beira-mar, Gym_{[7:30am-8:30am]}>$ 
 \end{itemize}
 First, we apply the function $match()$ (Equation \ref{func:match1}) for the stops. In this case, the start stops have some degree of similarity: their semantics is the same and the time distance of $Home_{P}$ and $Home_{Q}$ is $\approx 0.15$, lower than our defined threshold of $0.5$. However, the spatial distance is $dist_{eucl}(Home_{P}, Home_{Q}) \approx 158 $, higher than the defined threshold (100), so not matching in space, only in time and semantics, leading to a similarity score of $2/3$ between start stops $Home_{[8pm-8am]}$ and $Home_{[7pm-7am]}$. The end stops (Gym and Coffee Shop) are dissimilar in space (with a distance of $\approx 163$), in time (no overlap), and in semantics, then the similarity score between both end stops is $0.0$.
 
- Equation \ref{func:scoreStop1} computes the stops similarity as the average similarity of start stops  and end stops as: $scoreStops(element_{P}, element_{Q}) = (2/3 + 0) / 2 \approx 0.33$.
- As the function $matchStops()$ is false in this example since $dist_{eucl}(Coffee$ $shop_{P}, Gym_{Q}) > 100$, when applying Equation \ref{func:scoreMove2}, the function %https://www.overleaf.com/project/5b9ab8c15115371a958f974f 
-$scoreMove()=0$. Then, Equation \ref{func:score1} computes the movement element similarity as the sum of stops similarity weighted by $w_{stops}$ and the move similarity weighted by $w_{move}$. In this example, $score(element_{P}, element_{Q}) = (0.33 * 0.50) + (0.00 * 0.50) \approx 0.17$. Table \ref{tab:SMSM_scores} summarizes SMSM similarity scores between all movement elements.
+ Equation \ref{func:scoreStop1} computes the stops similarity as the average similarity of start stops  and end stops as: $scoreStops($$element_{P}$, $element_{Q}$) = $(2/3 + 0) / 2 \approx 0.33$.
+ As the function $matchStops()$ is false in this example since $dist_{eucl}(Coffee$ $shop_{P}, Gym_{Q}) > 100$, when applying Equation \ref{func:scoreMove2}, the function
+$scoreMove()=0$. Then, Equation \ref{func:score1} computes the movement element similarity as the sum of stops similarity weighted by $w_{stops}$ and the move similarity weighted by $w_{move}$. In this example, $score($$element_{P}$, $element_{Q}$) = $(0.33 * 0.50) + (0.00 * 0.50) \approx 0.17$. Table \ref{tab:SMSM_scores} summarizes SMSM similarity scores between all movement elements.
 
 \begin{table}[h]
 \scriptsize
@@ -224,6 +227,7 @@ MSM will measure the similarity between all stops using the same dimensions: spa
 \scriptsize
 \centering
 \centerline{
+ \resizebox{\linewidth}{!}{%
   \begin{tabular}{|l|c|c|c|c|c|}
   	\hline
          \backslashbox[26mm]{P}{Q} & 
@@ -239,10 +243,11 @@ MSM will measure the similarity between all stops using the same dimensions: spa
   	\hline
   \end{tabular}
   }
+  }
   \caption{Similarity scores for MSM}
   \label{tab:MSM_comparision}
 \end{table}
 
 MSM calculates the parity between both trajectories by summing the highest scores of all stops of one trajectory compared with all stops of the other trajectory. The similarity value of MSM is given by $(parity(P, Q) + parity(Q, P)) / (|P| + |Q|) = (3.33 + 3.33) / (4 + 4) \approx 0.83 $, indicating that the two trajectories have a high similarity degree, what is not the case of the trajectories in the example. The high similarity given by MSM is due to the fact that the order of the stops is not important and the moves are not considered.
 
-As we claimed initially, in some applications the movement sequence can be very important. In this example, SMSM evidences that, beside a strong similarity in the spatial dimension and stop categories, the sequence of stops (i.e person routine) and the moves is very dissimilar. In the following section we compare our measure with other state-of-the-art approaches, considering real and synthetic trajectories.
+As we claimed initially, in some applications the movement sequence can be very important. In this example, SMSM evidences that, beside a strong similarity in the spatial dimension and stop categories, the sequence of stops (i.e person routine) and the moves is very dissimilar. In the following section we compare our measure with other state-of-the-art approaches, considering real trajectories.

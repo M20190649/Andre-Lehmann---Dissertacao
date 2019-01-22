@@ -1,5 +1,79 @@
 \swapcontents
 {
+    \addtotextpreliminarycontent{Resumo em Português}
+    \begin{otherlanguage*}{brazil}
+    \begin{resumo}[Resumo]
+
+        Por muitos anos a pesquisa em similaridade de trajetórias focou nas trajetórias brutas, considerando somente a informação de espaço e tempo. Com o enriquecimento \textcolor{blue}{das trajetórias com informações semânticas, como o nome e a categria dos locais visitados, meio de transporte utilizado, nome das ruas trafegadas, etc}, emergiu a necessidade por medidas de similaridade que suportem espaço, tempo e semântica. Apesar de algumas medidades de similaridade para trajetórias lidarem com todas estas dimensões, elas consideram somente os \textcolor{blue}{locais onde o objeto móvel faz paradas (os \emph{stops}), ignorando aquilo que ocorre entre as paradas (os \emph{moves})}.
+        %\textcolor{red}{de onde vieram stops e moves? precisa explicar de onde vieram, relacionar com a semantica, e falar o que sao stops e o que sao moves, porque no paragrafo seguinte voce motiva a necessidade de usar moves na similaridade, entao o leitor precisa saber o que sao}
+        Acredita-se que, para algumas aplicações, o movimento entre os \emph{stops} é tão importante quanto o \emph{stop} em si, e ele deve ser levado em consideração na análise da similaridade\textcolor{blue}{, como em sistemas de gerenciamento de tráfego, transporte público, planejamento urbano, entre outros.}
+        Nesta dissertação é proposta a medida \textcolor{blue}{Similarity Measure for trajectory Stops and Moves} (SMSM), um nova medidade de similaridade para trajetórias semânticas que considera tanto os \emph{stops} quanto os \emph{moves}.
+        O SMSM é avaliado em três conjuntos de dados: (i) um conjunto de dados de trajetórias sintéticas criadas com o gerador de trajetórias semânticas Hermoupolis, (ii) um conjunto de trajetórias reais \textcolor{blue}{de táxis} do projeto CRAWDAD, e (iii) um conjunto de dados Geolife\textcolor{blue}{, com trajetórias reais de pessoas na cidade de Pequim}. Os resultados mostram que o SMSM supera as medidas de similaridade estado-da-arte desenvolvidas tanto para trajetórias brutas quanto semânticas.
+        
+        \imprimirpalavraschave{Palavras-chaves}{\begin{inparaitem}[]\palavraschaveportugues\end{inparaitem}}
+
+    \end{resumo}
+    \end{otherlanguage*}
+}
+{
+    \addtotextpreliminarycontent{Resumo expandido em Português}
+    \begin{otherlanguage*}{brazil}
+    \begin{resumo}[Resumo Expandido]
+        \textbf{INTRODUÇÃO}
+        \newline
+        \newline
+        Por muitos anos a pesquisa em similaridade de trajetórias focou nas trajetórias brutas, \textcolor{blue}{que são sequências de pontos possuindo somente informações de localização e um instante de tempo. Estas medidas de similaridade somente consideravam a informação espaço-temporal, limitando a comparação das trajetórias às suas características geo-espaciais. Com o advento das redes sociais e} o enriquecimento \textcolor{blue}{das trajetórias com informações semânticas, como o nome e a categria dos locais visitados, meio de transporte utilizado, nome das ruas trafegadas, etc}, emergiu a necessidade por medidas de similaridade que suportem espaço, tempo e semântica. Apesar de algumas medidades de similaridade para trajetórias lidarem com todas estas dimensões, elas consideram somente os \textcolor{blue}{locais onde o objeto móvel faz paradas (os \emph{stops}), ignorando aquilo que ocorre entre as paradas (os \emph{moves})}.
+        Acredita-se que, para algumas aplicações, o movimento entre os \emph{stops} é tão importante quanto o \emph{stop} em si, e ele deve ser levado em consideração na análise da similaridade\textcolor{blue}{, como em sistemas de gerenciamento de tráfego, transporte público, planejamento urbano, entre outros.}
+        Nesta dissertação é proposta a medida \textcolor{blue}{Similarity Measure for trajectory Stops and Moves} (SMSM), um nova medidade de similaridade para trajetórias semânticas que considera tanto os \emph{stops} quanto os \emph{moves}.
+        O SMSM é avaliado em três conjuntos de dados: (i) um conjunto de dados de trajetórias sintéticas criadas com o gerador de trajetórias semânticas Hermoupolis, (ii) um conjunto de trajetórias reais \textcolor{blue}{de táxis} do projeto CRAWDAD, e (iii) um conjunto de dados Geolife\textcolor{blue}{, com trajetórias reais de pessoas na cidade de Pequim}. Os resultados mostram que o SMSM supera as medidas de similaridade estado-da-arte desenvolvidas tanto para trajetórias brutas quanto semânticas.
+        
+        \newline
+        \newline
+        \textbf{OBJETIVOS}
+        \newline
+        \newline
+        O objetivo geral deste trabalho é a proposição de uma nova medida de similaridade para trajetórias semânticas.
+        \newline
+        \textbf{Os objetivos específicos desta dissertação são:}
+        \newline
+        $\bullet$ A nova medida de similaridade para trajetórias semânticas irá considerar tanto os \emph{stops} quanto os \emph{moves} das trajetórias;
+        \newline
+        $\bullet$ A nova medida de similaridade permitirá medir a similaridade de trajetórias semânticas considerando múltiplas dimensões como espaço, tempo, semântica e quaisquer outras dimensões adicionais;
+        \newline
+        $\bullet$ A nova medida de similaridade irá considerar a ordem dos pontos na trajetórias.
+        \newline
+        \newline
+        
+        \textbf{METODOLOGIA}
+        \newline
+        \newline
+        Inicialmente foi realizada uma revisão da literatura em tópicos relacionados à similaridade de trajetórias semânticas, através de ferramentas de pesquisa como Google Scholar e em periódicos e conferências de alto impacto (como TKDE, IJGIS, TGIS, VLDB, DKE, ACMSIGSpatial, entre outros). Através da análise e implementação das medidas existentes foram identificadas algumas das suas limitações e com isto pode-se propor uma nova medida de similaridade que melhore a medição de similaridade entre duas trajetórias.
+        \newline
+        A medida SMSM considera que o \emph{move} nas trajetórias semânticas é relevante e deveria ser considerado na medição de similaridade de duas trajetórias. o SMSM provê um \emph{framework} para medição de trajetórias semânticas na medida em que cada aspecto da trajetória pode ser individualmente ajustado, como por exemplo, o grau de importância entre os \emph{stops} e os \emph{moves}, o grau de importância de cada atributo que compoe os \emph{stops} e os moves e também os limiares (\emph{thresholds}) utilizados em cada atributo para definir se houve casamento (\emph{matching}) ou não entre os pontos.
+        \newline
+        A medida foi avaliada em conjuntos de dados reais, já utilizadas na literatura como \cite{epfl-mobility-20090224} e também \cite{zheng2009mining}, assim como um conjunto de dados sintéticos, produzidos utilizando a ferramenta \cite{Pelekis-Hermoupolis}. 
+        Inicialmente as bases de dados de trajetórias brutas foram enriquecidas com informações sobre os \emph{stops} e os \emph{moves} que ocorreram durante cada trajetória. Este enriquemento adiciona às trajetórias informações sobre os locais (POIs) em que cada \emph{stop} ocorreu, assim como informações sobre a atividade e o meio de transporte que foram utilizados durante cada \emph{move}.
+        De posse das trajetórias semanticamente enriquecidas, foi possível avaliar e comparar a medida proposta. Para isto foi utilizada a abordagem de precisão em diferentes níveis de cobertura em tarefas de recuperação da informação \cite{BaezaYatesRibeiroNeto2011}. Tambem foi avaliado o impacto dos parâmetros de grau de importância e limiares para a medida proposta.
+        \newline
+        \newline
+        
+        \textbf{RESULTADOS E DISCUSSÃO}
+        \newline
+        \newline
+        Os resultados obtidos com os experimentos realizados com os conjuntos de dados e demais medidas de similaridade supracitadas evidenciam que a medida SMSM mostrou-se a mais robusta para avaliar a similaridade de trajetórias semânticas onde tanto as informações sobre os \emph{stops} quanto os \emph{moves} são relevantes para a similaridade das trajetórias. A medida também mostrou-se flexível para suportar múltiplas dimensões de dados tanto nos \emph{stops} quanto nos \emph{moves} e flexível também para a definição de limiares (\emph{matching}) para cada dimensão. Estes resultados foram obtidos pela capacidade de a medida mensurar a similaridade de duas trajetórias utilizando também a informação do \emph{move} que ocorre entre dois \emph{stops} sequenciais.
+        
+        \newline
+        \newline
+        \textbf{CONSIDERAÇÕES FINAIS}
+        \newline
+        \newline
+        As principais contribuições desta dissertação foram: (i) uma medida de similaridade para sequências multidimensionais para elementos com dimensões heterogêneas, como o são os \emph{stops} e \emph{moves}; (ii) a medida de similaridade suporta tanto os \emph{stops} quantos os \emph{moves}, considerando suas dimensões espaciais, temporais e semânticas, permitindo o uso de diferentes funções de distância para cada dimensão; e (iii) a medida de similaridade é flexível suficiente para considerar a ordem dos \emph{stops} e suporte a diferentes pesos para os \emph{stops}, os \emph{moves} e as dimensões constituintes de cada elemento, possibilitando se dar maior ou menor importância para cada elemento. A medida proposta nesta dissertação foi publicada no periódico International Journal of Geographical Information Science.
+        \imprimirpalavraschave{Palavras-chaves}{\begin{inparaitem}[]\palavraschaveportugues\end{inparaitem}}
+
+    \end{resumo}
+    \end{otherlanguage*}
+}
+{
     % Changing babel package inside a single chapter
     % https://tex.stackexchange.com/questions/20987/changing-babel-package-inside-a-single-chapter
     %
@@ -14,20 +88,6 @@
         We evaluate SMSM with three trajectory datasets: (i) a synthetic trajectory dataset generated with the Hermoupolis semantic trajectory generator, (ii) a real trajectory dataset from the CRAWDAD project, and (iii) the Geolife dataset. The results show that SMSM overcomes state-of-the-art measures developed for both raw and semantic trajectories.
 
         \imprimirpalavraschave{Keywords}{\begin{inparaitem}[]\palavraschaveingles\end{inparaitem}}
-
-    \end{resumo}
-    \end{otherlanguage*}
-}
-{
-    \addtotextpreliminarycontent{Resumo em Português}
-    \begin{otherlanguage*}{brazil}
-    \begin{resumo}[Resumo]
-
-        Por muitos anos a pesquisa em similaridade de trajetórias focou nas trajetórias brutas, considerando somente a informação de espaço e tempo. Com o enriquecimento semãntico das trajetórias emergiu a necessidade por medidas de similaridade que suportem o espaço, tempo e semântica. Apesar de algumas medidades de similaridade para trajetórias lidarem com todas estas dimensões, elas consideram somente os stops, ignorando os moves. Acredita-se que, para algumas aplicações, o movimento entre os stops é tão importante quanto o stop em si, e ele deve ser levado em consideração na análise da similaridade.
-        Nesta dissertação é proposta a medida SMSM, um nova medidade de similaridade para trajetórias semânticas que considera tanto os stops quanto os moves.
-        O SMSM é avaliado em três conjuntos de dados: (i) um conjunto de dados de trajetórias sintéticas criadas com o gerador de trajetórias semânticas Hermoupolis, (ii) um conjunto de trajetórias reais do projeto CRAWDAD, e (iii) o conjunto de dados Geolife. Os resultados mostram que o SMSM supera o as medidas de similaridade estado-da-arte desenvolvidas tanto para trajetórias brutas quanto semãnticas.
-        
-        \imprimirpalavraschave{Palavras-chaves}{\begin{inparaitem}[]\palavraschaveportugues\end{inparaitem}}
 
     \end{resumo}
     \end{otherlanguage*}
