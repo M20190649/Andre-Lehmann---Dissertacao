@@ -24,14 +24,14 @@ Stops and moves by definition are different and heterogeneous trajectory element
 
 In order to deal with these heterogeneous elements (stops and moves), we introduce the concept of \emph{movement element}. A movement element is a new representation that is not treated by other measures, mainly MSM, which supports only stops. Indeed, MSM does not consider the order of trajectory elements, while in our approach we preserve the sequence of both stops and moves in a movement element.
 
-\begin{definition}
+\begin{definition}[Movement element]
 \label{def:movement_element}
-A movement element  $e=(stopS, move, stopE)$ is a tuple formed by a start stop $stopS$, the $move$ between $stopS$ and  $stopE$, and the end stop $stopE$, where stopS and stopE are two consecutive stops.
+A movement element e = \emph{(stopS, move, stopE)} is a tuple formed by a start stop \emph{stopS}, the move between \emph{stopS} and \emph{stopE}, and the end stop \emph{stopE}, where \emph{stopS} and \emph{stopE} are two consecutive stops.
 \end{definition}
 
 
 Hereafter we will consider a semantic trajectory as a sequence of \textit{movement elements}, as follows: 
-$ST=\langle e_1 = (s_1,m_1,s_2), e_2$\newline $= (s_2,m_2,s_3), ..., e_n = (s_n,m_n,s_{n+1}) \rangle$.
+$P=\langle e_1 = (s_1,m_1,s_2), e_2$\newline $= (s_2,m_2,s_3), ..., e_n = (s_n,m_n,s_{n+1}) \rangle$.
 
 Notice that we define a movement element as a trajectory part, and this structure will be used for the proposed similarity measure, where one trajectory will be compared with another one based on their movement elements.
 
