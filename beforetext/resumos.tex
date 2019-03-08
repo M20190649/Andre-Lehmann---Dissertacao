@@ -32,6 +32,7 @@
         \textbf{OBJETIVOS}
         \newline
         \newline
+        \textcolor{blue}{
         O objetivo geral deste trabalho é a proposição de uma nova medida de similaridade para trajetórias semânticas.
         \newline
         \textbf{Os objetivos específicos desta dissertação são:}
@@ -40,7 +41,8 @@
         \newline
         $\bullet$ A nova medida de similaridade permitirá medir a similaridade de trajetórias semânticas considerando múltiplas dimensões como espaço, tempo, semântica e quaisquer outras dimensões adicionais;
         \newline
-        $\bullet$ A nova medida de similaridade irá considerar a ordem dos pontos na trajetória semântica.
+        $\bullet$ A nova medida de similaridade irá considerar parcialmente a ordem dos pontos na trajetória semântica.
+        }
         \newline
         \newline
         
@@ -51,7 +53,7 @@
         \newline
         A medida SMSM considera que o \emph{move} nas trajetórias semânticas é relevante e deveria ser considerado na medição de similaridade de duas trajetórias. \textcolor{blue}{O SMSM é proposto como uma medida de similaridade para trajetórias semânticas que permite que a comparação de cada característica da trajetória possa ser individualmente ajustada, como por exemplo, o grau de importância entre os \emph{stops} e os \emph{moves}, o grau de importância de cada atributo que compõe os \emph{stops} e os \emph{moves} e também os limiares (\emph{thresholds}) utilizados em cada atributo para definir se houve casamento (\emph{matching}) ou não entre os pontos.}
         \newline
-        A medida foi avaliada em conjuntos de trajetórias brutas reais, já utilizadas na literatura como \cite{epfl-mobility-20090224} e também \cite{zheng2009mining}, assim como um conjunto de dados sintéticos, produzidos utilizando a ferramenta \cite{Pelekis-Hermoupolis}. 
+        A medida foi avaliada em conjuntos de trajetórias brutas reais, já utilizadas na literatura como \cite{epfl-mobility-20090224} e também \cite{zheng2009mining}, assim como um conjunto de dados sintéticos, produzidos utilizando a ferramenta Hermoupolis \cite{Pelekis-Hermoupolis}. 
         Inicialmente as bases de dados de trajetórias brutas foram enriquecidas com informações sobre os \emph{stops} e os \emph{moves} que ocorreram durante cada trajetória. Este enriquecimento adiciona às trajetórias informações sobre os locais (POIs) em que cada \emph{stop} ocorreu, assim como informações sobre a atividade e o meio de transporte que foram utilizados durante cada \emph{move}.
         De posse das trajetórias semanticamente enriquecidas, foi possível avaliar e comparar a medida proposta. Para isto foi utilizada a abordagem de precisão em diferentes níveis de cobertura \cite{BaezaYatesRibeiroNeto2011} em tarefas de recuperação da informação. Também foram avaliados o impacto dos parâmetros de grau de importância e limiares para a medida proposta e o tempo de execução da tarefa de recuperação de informação.
         \newline
@@ -60,7 +62,7 @@
         \textbf{RESULTADOS E DISCUSSÃO}
         \newline
         \newline
-        Os resultados obtidos com os experimentos realizados evidenciam que a medida SMSM mostrou-se a mais robusta para avaliar a similaridade de trajetórias semânticas onde tanto as informações sobre os \emph{stops} quanto os \emph{moves} são relevantes para a similaridade das trajetórias. A medida também mostrou-se flexível para suportar múltiplas dimensões de dados tanto nos \emph{stops} quanto nos \emph{moves} e flexível também para a definição de limiares (\emph{matching}) para cada dimensão.
+        Os resultados obtidos com os experimentos realizados evidenciam que a medida SMSM mostrou-se a mais robusta para avaliar a similaridade de trajetórias semânticas onde tanto as informações sobre os \emph{stops} quanto os \emph{moves} são relevantes para a similaridade das trajetórias. A medida também mostrou-se flexível para suportar múltiplas dimensões de dados tanto nos \emph{stops} quanto nos \emph{moves} e flexível também ao permitir a definição de diferentes limiares (\emph{thresholds}) para cada dimensão.
         
         \newline
         \newline
