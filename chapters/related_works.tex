@@ -21,7 +21,7 @@
 In this chapter we present the basic concepts related to trajectories in Section \ref{sec:basic_concepts}. In Section \ref{sec:related_measures} we present a review on trajectory similarity measures, where the section \ref{sec:related_raw} presents measures for raw trajectory similarity and the section \ref{sec:related_semantic} presents measures for semantic trajectory similarity.
 
 \section{Basic concepts} \label{sec:basic_concepts}
-\hl{There are three important concepts that need to be explained and defined: raw trajectory, semantic trajectory and similarity measure.}
+There are three important concepts that need to be explained and defined: raw trajectory, semantic trajectory and similarity measure.
 
 A raw trajectory is a discrete representation of the movement of an object that can be defined as a time-ordered finite sequence of space-time points, as formalized in Definition \ref{def:raw_trajectory}. 
 
@@ -29,7 +29,7 @@ A raw trajectory is a discrete representation of the movement of an object that 
 A raw trajectory is a time-ordered sequence of points in the form R = $<p_1,...,p_n>$ where point p\textsubscript{k} $\in$ R is a tuple p\textsubscript{k} = ($x,y,t$), where $x,y$ represent the spatial location of the moving object at a time instant $t$.
 \end{definition}
 
-Figure \ref{fig:related_trajes} illustrates a example of raw trajectory $R$. The spatial coordinates are annotated next to the trajectory points and we consider the time instants as the index associated to each point. For instance, the first point of trajectory is located at the coordinates $(6,39)$ at time instant $1$.
+Figure \ref{fig:related_trajes} illustrates an example of raw trajectory $R$. The spatial coordinates are annotated next to the trajectory points and we consider the time instants as the index associated to each point. For instance, the first point of trajectory is located at the coordinates $(6,39)$ at time instant $1$.
 
 \begin{figure}[h]
 \centering
@@ -54,7 +54,7 @@ Figure \ref{fig:related_semantic_trajes} shows a semantic trajectory $P$ represe
 \caption{\label{fig:related_semantic_trajes}A semantic trajectory $P$ representing 1 day movement of a professor}
 \end{figure}
 
-\hl{To compare and measure two distinct trajectories we use a similarity measure. In this thesis we use the intuitive concept of similarity stated in }\cite{lin1998information}\hl{, where two objects $A$ and $B$ are said as more similar when they share more commonality between each other and they are less similar as more differences they have. We formalize the similarity measure concept according Definition }\ref{def:similarity_measure}:
+To compare and measure two distinct trajectories we use a similarity measure. In this thesis we use the intuitive concept of similarity stated in \cite{lin1998information}, where two objects $A$ and $B$ are said as more similar when they share more commonality between each other and they are less similar as more differences they have. We formalize the similarity measure concept according Definition \ref{def:similarity_measure}:
 
 \begin{definition}[Similarity Measure]
 \label{def:similarity_measure}
@@ -63,7 +63,7 @@ A similarity measure on a object set $G$ is a function $sim: G \times G \to [0,1
 
 \section{Related Trajectory Similarity Measures} \label{sec:related_measures}
 
-\hl{Similarity measures have been proposed for several data processing and analysis techniques, such as outlier detection, top-K similarity queries, clustering, and others. In the context of trajectory data, several similarity measures were proposed for both raw trajectory data and semantic trajectory data. In this section, we present a literature review on similarity measures of raw and semantic trajectories.}
+Similarity measures have been proposed for several data processing and analysis techniques, such as outlier detection, top-K similarity queries, clustering, and others. In the context of trajectory data, several similarity measures were proposed for both raw trajectory data and semantic trajectory data. In this section, we present a literature review on similarity measures of raw and semantic trajectories.
 The Section \ref{sec:related_raw} presents similarity measures for raw trajectories and Section \ref{sec:related_semantic} presents similarity measures for semantic trajectories.
 
 
@@ -93,7 +93,7 @@ Throughout this section, we use a set of symbols to denote hypothetical trajecto
 \end{table}
 
 An early proposed distance measure is the \emph{Dynamic Time Warping} (DTW) \cite{berndt1994using}, developed for time-series. DTW is used to find the best match between the points of two time-series independent of their sizes. It creates a matrix with all possible pairs of points of the time-series with the pairwise distances as the entries.
-The total distance between two trajectories is given by the sum of the entries of the minimum contiguous path in the matrix{, where the minimum contiguous path is the best alignment between two sequences of points, with the lower sum of distances of their points}. Because DTW sums the distances between all points, it is sensitive to noise. For example, when a time-series $P$ has a point that is significantly distant from all points of the time-series $Q$, even if all the other points of $P$ and $Q$ are close, their distance will be dominated by the distant point. A recursive formalization of DTW is presented in Equation \ref{func:DTW}.
+The distance between two trajectories is given by the sum of the entries of the minimum contiguous path in the matrix, where the minimum contiguous path is the best alignment between the sequences. Because DTW sums the distances between all points, it is sensitive to noise. For example, when a time-series $P$ has a point that is significantly distant from all points of the time-series $Q$, even if all the other points of $P$ and $Q$ are close, their distance will be dominated by the distant point. A recursive formalization of DTW is presented in Equation \ref{func:DTW}.
 
 \begin{equation}
 \label{func:DTW}
@@ -120,7 +120,7 @@ Ding in \cite{Ding:2008:ESJ:1440463.1440989} proposes \emph{w-constrained discre
   j \leq P_{m} - w
 \end{equation}
 
-Figure \ref{fig:related_trajes_wDF_DTW} (right) shows trajectories $P$ and $Q$ and a \emph{w} time-window. The wDF distance between the trajectories is computed as the maximal distance found among all \emph{w}-constrained time-windows. As the time-window shifts over trajectories, the maximal distance between their points is computed, using the Euclidean distance. In the example of Figure \ref{fig:related_trajes_wDF_DTW} (right), the wDF distance is $wDF($P$, $Q$) = euclidean((6,39), (4,9)) \approx 30$.
+Figure \ref{fig:related_trajes_wDF_DTW} (right) shows trajectories $P$ and $Q$ and a \emph{w} time-window. The wDF distance between the trajectories is computed as the lower distance found among all \emph{w}-constrained time-windows. As the time-window shifts over trajectories, the maximal distance between their points is computed, using the Euclidean distance. In the example of Figure \ref{fig:related_trajes_wDF_DTW} (right), the wDF distance is $wDF(P, Q) \approx 30$.
 
 \begin{figure}[h]
 \centering

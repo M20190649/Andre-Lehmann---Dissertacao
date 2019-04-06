@@ -37,7 +37,9 @@ Notice that we define a movement element as a trajectory part, and this structur
 
 
 
-We analyze the similarity of a movement element $a\in A$ with another movement element $b\in B$, where A and B are semantic trajectories, in two parts: their stops and their moves. The basis for measuring the similarity of these two parts is the \emph{match} function, given in Equation \ref{func:match1}. The function returns 1 if the distance between an attribute (also called dimension) of two movement elements is less than a given threshold \emph{maxDist}, and zero otherwise. This function is used for measuring the distance of all dimensions of both: the stops and the moves.
+We analyze the similarity of a movement element $a\in A$ with another movement element $b\in B$, where A and B are semantic trajectories, in two parts: their stops and their moves. The basis for measuring the similarity of these two parts is the \emph{match} function, given in Equation \ref{func:match1}. The function returns 1 if the distance between an attribute (also called dimension) of two movement elements is less than a given threshold \emph{maxDist}, and zero otherwise. This function is used for measuring the distance of all dimensions of both the stops and the moves. For analyzing the spatial distance between two stops, for
+instance, if considering maxDist=100 meters, two stops match when their spatial distance
+is less or equal to 100 meters.
 
 \begin{equation}
 %\scriptsize
@@ -59,7 +61,7 @@ score(a, b) = scoreStop(a, b) * w_{stop} + scoreMove(a, b) * w_{move}
 \end{equation}
 
 
-In our measure we consider a score for the stops (scoreStop) and a score for the move (scoreMove). The functions \emph{scoreStop(a,b)} and \emph{scoreMove(a,b)} are defined in Equations \ref{func:scoreStop1} and \ref{func:scoreMove2}, respectively. In both equations, $r$ and $q$ are the number of dimensions (attributes) of stops and moves, respectively. The score of the stops, computed according to Equation \ref{func:scoreStop1}, is given by the average of all dimension matches of the start and end stops of two movement elements $a$ and $b$. 
+In our measure we consider a score for the stops (scoreStop) and a score for the move (scoreMove). The functions \emph{scoreStop(a,b)} and \emph{scoreMove(a,b)} are defined in Equations \ref{func:scoreStop1} and \ref{func:scoreMove2}, respectively. In both equations, $r$ and $q$ are the number of dimensions (attributes) of stops and moves, respectively. The score of the stops, computed according to Equation \ref{func:scoreStop1}, is given by weighted sum of all dimension matches of the start and end stops of two movement elements $a$ and $b$. Some examples of computing \emph{scoreStop()} and \emph{scoreMove()} are presented in the next section.
 
 
 \begin{equation}
@@ -99,7 +101,8 @@ The function \emph{matchStops(a,b)} is true when the {spatial distance} between 
 
 %{Differences among the three movement elements rely exclusively on the differences of the move. On the other hand, the difference of these movement elements to movement element $<A, P_4, C>$ is more evident, since if it end stop is distinct, the move is distinct too. Based on this, SMSM do not compare the move of $<A, P_4, C>$ with the others movement element.}
 
-{The function \emph{scoreMove()} guarantees a partial order in the similarity analysis. %, what has not been considered by MSM, which is the closest measure to our approach, but that considers only stops and without any order. Considering that the four movement elements in Figure {\ref{fig:move}} belong to four different trajectories, MSM would give the same similarity for the parts of the trajectories going from $A$ to $B$, because it does not look the moves, and 50\% similarity with the trajectory going from $A$ to $C$ because they share 50\% of the stops.
+{%The function \emph{scoreMove()} guarantees a partial order in the similarity analysis. %, what has not been considered by MSM, which is the closest measure to our approach, but that considers only stops and without any order. Considering that the four movement elements in Figure {\ref{fig:move}} belong to four different trajectories, MSM would give the same similarity for the parts of the trajectories going from $A$ to $B$, because it does not look the moves, and 50\% similarity with the trajectory going from $A$ to $C$ because they share 50\% of the stops.
+The function $scoreMove()$ guarantees the order of the stops inside the movement elements, what partially includes the order of stops in the similarity analysis
 Suppose the example in  Figure {\ref{fig:move}} is a real scenario, where $A$, $B$, and $C$ represent  places as France, Italy, and Spain, respectively. We believe that the three trajectories going from France ($A$) to Italy ($B$) must have their move analyzed because they visit the same sequence of places, while the trajectory that goes from France ($A$) to Spain ($C$) does not share the same destination, so the move of this trajectory is not compared with the others, and the function $scoreMove()$ has values zero.}
 
 
@@ -130,6 +133,10 @@ Finally, we can define the global similarity of two trajectories $A$ and $B$ wit
 \end{split}
 \end{equation}
 
+The complexity of SMSM is defined by the function $parity(A,B)$ that executes the function $score()$ $m\cdot n$ times, where $m$ and $n$ are the length of trajectories $A$ and $B$. This
+is the same complexity of other similarity methods as MSM, LCSS and EDR, when the
+function $match()$ inside $scoreMove()$ is constant in time, that is the case when $match()$
+compares the name of the streets of the moves, the transportation means of the moves, the duration of the moves, etc. The processing time of SMSM is higher when the raw trajectories of the moves are considered for $match()$. When this is the case then the complexity of $match()$ can become $O(p\cdot q$), where $p$ and $q$ are the number of points of the two moves being compared. On the other hand, SMSM is faster than methods applied to raw trajectories.
 
 
 \section{Evaluation over a running example}
