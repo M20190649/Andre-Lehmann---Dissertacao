@@ -51,10 +51,17 @@
 % https://tex.stackexchange.com/questions/5076/is-it-possible-to-keep-my-translation-together-with-original-text
 \chapter{\lang{Introduction}{Introdução}}
 %\phantomsection
-Trajectory similarity measuring has received significant attention in the last few years, and several measures have been proposed {to deal either with raw trajectories or semantic trajectories}. A \emph{raw trajectory} is generally represented as a sequence of points $T=<p_1, p_2, ...p_n>$, with $p_i=(x_i,y_i,t_i)$ where $x,y$ is the position of the object in space at time instant $t$.  Examples of similarity measures for raw trajectories are LCSS (Longest Common SubSequence) \cite{vlachos2002discovering}, EDR (Edit Distance on Real sequences) \cite{Chen:2005:RFS:1066157.1066213}, NWED (Normalized Weighted Edit Distance) \cite{dodge2012} and UMS (Uncertain Movement Similarity) \cite{Furtado-UMS-2018}. LCSS and EDR consider the sequence, but they force a match in all dimensions, not allowing partial similarity between trajectory points.
+Trajectory similarity measuring has received significant attention in the last few years, and several measures have been proposed to deal either with raw trajectories or semantic trajectories. A \emph{raw trajectory} is generally represented as a sequence of points $T=<p_1, p_2, ...p_n>$, with $p_i=(x_i,y_i,t_i)$ where $x,y$ is the position of the object in space at time instant $t$. Figure \ref{fig:example_raw_trajectory} presents an example of a raw trajectory $T$, where the first point of trajectory is located at the coordinates $(2,3)$ at time instant $1$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth]{Images/example_raw-trajectory.png}
+\caption{Example of a raw trajectory T}
+\label{fig:example_raw_trajectory}
+\end{figure}
+
+Examples of similarity measures for raw trajectories are LCSS (Longest Common SubSequence) \cite{vlachos2002discovering}, EDR (Edit Distance on Real sequences) \cite{Chen:2005:RFS:1066157.1066213}, NWED (Normalized Weighted Edit Distance) \cite{dodge2012} and UMS (Uncertain Movement Similarity) \cite{Furtado-UMS-2018}. LCSS and EDR consider the sequence, but they force a match in all dimensions, not allowing partial similarity between trajectory points.
 UMS is a parameter free method that considers only the spatial dimension, and it was developed to deal with data of varied or low sampling rate.
-
-
 Existing works for raw trajectory similarity are limited to the spatio-temporal properties of raw trajectories, basically considering trajectories as data with only space information or space and time.
 
 Similarity measures are the basis of several data processing and analysis techniques, such as information retrieval, location prediction, nearest neighbour queries, outlier detection, clustering, etc. A clustering algorithm, for instance, uses a similarity measure for grouping objects with similar trajectories. Outlier detection methods use similarity to find groups of trajectories with normal behavior, and the objects that are dissimilar to the majority, are the outliers. To detect specific trajectory patterns such as flocks \cite{Laube2005}, for instance, a raw trajectory similarity measure could be applied to find a minimal number of objects moving together in space and time.
@@ -63,14 +70,14 @@ In 2008 emerged the concept of semantic trajectories, introduced by \cite{Spacca
 
 The enrichment of trajectories with semantic information is a well studied topic in the literature, and a number of methods have been developed for this purpose, as the works of \cite{alvares2007model}, \cite{Palma2008}, \cite{manso}, and \cite{fileto2013baquara}. Applications as DayTag \cite{fernando2013} can detect stops and moves and the user can add the semantics to his/her trajectories. Examples of semantic information related to the stops can be, for instance, the name of the stop (e.g. Ibis Hotel) and the category (e.g. Hotel, Museum, Restaurant), while the semantic information related to the move could be, for instance, the name of the streets followed by the moving object and the category of the transportation mode. An example of semantic trajectory is shown in Figure \ref{fig:example_semantic_trajectory}.
 
-With explosion of social media data, internet channels, and the facility to enrich trajectories with more context information as linked open data of Baquara \citep{fileto2013baquara}, allows the representation of movement in a more meaningful way. From social media data, for instance, a stop at a hotel can be enriched with the information of the number of stars, the price average, evaluation rate, facilities, parking, wifi, etc.  In this thesis we assume that semantic trajectories are represented as sequences of stops and moves, as originally defined in \cite{Spaccapietra:2008:CVT:1347466.1347785}, and the way how these trajectories are generated or enriched is out of the scope of this thesis.
+With explosion of social media data, internet channels, and the facility to enrich trajectories with more context information as linked open data of Baquara \cite{fileto2013baquara}, \hl{it is possible to represent the movement in a more meaningful way}. From social media data, for instance, a stop at a hotel can be enriched with the information of the number of stars, the price average, evaluation rate, facilities, parking, wifi, etc.  In this thesis we assume that semantic trajectories are represented as sequences of stops and moves, as originally defined in \cite{Spaccapietra:2008:CVT:1347466.1347785}, and the way how these trajectories are generated or enriched is out of the scope of this thesis.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{Images/example_semantic-trajectory.png}
-\caption{An example of a semantic trajectory}
-\end{figure}
+\caption{Example of a semantic trajectory S}
 \label{fig:example_semantic_trajectory}
+\end{figure}
 
 Similarity measures that consider both stops and moves can be important in a vast number of applications such as public transportation systems, traffic management, fraud detection, tourism, urban planning, car sharing, etc.
 
@@ -106,16 +113,10 @@ In summary, we make the following contributions:
 
 \section{Objective}
 
-The general objective of this thesis is the proposal of a novel semantic trajectory similarity measure, with proven accuracy and efficiency. We can further detail the aiming of this work in the following specific objectives:
-
-\begin{itemize}
-  \item The proposed similarity measure takes into account both \emph{stops} and \emph{moves} of the semantic trajectories;
-  \item The proposed similarity measure allows the measuring of semantic trajectories considering their multiple dimensions, such as spatial, temporal, semantics, and other additional dimensions;
-  \item The proposed similarity measure considers partially the sequence of the stops.
-\end{itemize}
+The general objective of this thesis is the proposal of a novel semantic trajectory similarity measure, with proven accuracy and efficiency. \hl{The proposed measure takes into account both \emph{stops} and \emph{moves} of the semantic trajectories, considering both total or partially the sequence of the \emph{stops}. The measure allows the measuring of semantic trajectories considering their multiple dimensions, such as spatial, temporal, semantics, and other additional dimensions. The measure assigns for each dimension a distinct importance value, where a more relevant dimension in an application is assigned with a greater weight.}
 
 \section{Methodology}
-The methodology adopted in this thesis has 8 steps:
+The methodology adopted in this thesis has basically 9 steps:
 
 \textit{Step} 1: Perform a review of the literature in related subjects such as trajectory similarity and semantic trajectory similarity using Google Scholar.
 
@@ -123,18 +124,20 @@ The methodology adopted in this thesis has 8 steps:
 
 \textit{Step} 3: Define a new semantic trajectory similarity measure to overcome limitations in existing similarity measures.
 
-\textit{Step} 4: Select, organize, and pre-process datasets with real trajectory data, such as San Francisco taxi dataset from the CRAWDAD project\cite{epfl-mobility-20090224}, the Geolife dataset \cite{zheng2009mining}, and synthetic data, such as generated by Hermoupolis tool\cite{Pelekis-Hermoupolis}.
+\textit{Step} 4: Select, organize, and pre-process several datasets with real trajectory data, such as San Francisco taxi dataset from the CRAWDAD project\cite{epfl-mobility-20090224}, the Geolife dataset \cite{zheng2009mining},  synthetic data, such as generated by Hermoupolis tool\cite{Pelekis-Hermoupolis}, and others.
 
-\textit{Step} 5: Evaluate the efficiency of the methods using the precision at recall \cite{BaezaYatesRibeiroNeto2011} as an information retrieval evaluation technique.
+\textit{Step} 5: \hl{Define a set of experiments and establishing a ground truth dataset for evaluating and comparing the proposed measure and state of the art.}
 
-\textit{Step} 6: Comparison of the results obtained in all datasets with the most related approaches in literature.
+\textit{Step} 6: Study and define a set of measures to be used for evaluating similarity.
 
-\textit{Step} 7: Write an article describing the proposed semantic similarity measure, reporting the results of it evaluation.
+\textit{Step} 7: Comparison of the results obtained in all datasets with the most related approaches in literature.
 
-\textit{Step} 8: Write the thesis describing the problem, the state-of-the-art, and the contribution for the problem solution with the advances over the state-of-the-art.
+\textit{Step} 8: Write an article describing the proposed semantic similarity measure, reporting the results of it evaluation.
+
+\textit{Step} 9: Write the thesis describing the problem, the state-of-the-art, and the contribution for the problem solution with the advances over the state-of-the-art.
 
 \section{Scope and Outline}
 
-This thesis is limited to the proposal of a novel similarity measure for semantic trajectories, evaluation and comparison of this new similarity measure with the most related approaches in literature. 
+This thesis is limited to the proposal of a novel similarity measure for semantic trajectories, evaluation and comparison of this new similarity measure with the most related approaches in the literature. 
 
-The rest of this thesis is organized as follows: \textit{Chapter} \ref{sec:related} presents the basic concepts and the related works for this thesis, \textit{Chapter} \ref{sec:proposed_measure} presents the proposed similarity measure with a running example, \textit{Chapter} \ref{sec:experiments} presents experiments over real and synthetic trajectory data, \textit{Chapter} \ref{sec:discussion} presents a discussion about the choice of a measure in face of application problems, and \textit{Chapter} \ref{sec:conclusions} summarizes the contributions of this thesis, its limitations and points out future steps of the present research.
+The rest of this thesis is organized as follows: \textit{Chapter} \ref{sec:related} presents the basic concepts and the related works for this thesis, \textit{Chapter} \ref{sec:proposed_measure} presents the proposed similarity measure with a running example, \textit{Chapter} \ref{sec:experiments} presents experiments over real and synthetic trajectory data, and a discussion about the choice of a measure in face of application problems, and \textit{Chapter} \ref{sec:conclusions} summarizes the contributions of this thesis, its limitations and points out future steps of the present research.
